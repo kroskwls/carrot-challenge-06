@@ -36,7 +36,7 @@ export default function Input({ name = '', errors, ...rest }: InputProps & Input
         />
       </div>
       {errors?.map((error, index) => (
-        <div key={index} className="text-red-500 text-md">
+        <div key={index} className="text-red-500 text-sm mt-2">
           {error}
         </div>
       ))}
