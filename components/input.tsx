@@ -14,7 +14,7 @@ interface InputProps {
 export default function Input({ name = '', errors, ...rest }: InputProps & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <div className={`flex items-center border border-gray-300 rounded-full px-5 outline-none focus-within:ring-2 focus-within:ring-gray-300 focus-within:ring-offset-2 ${errors ? "focus-within:ring-red-500 border-red-500" : ""}`}>
+      <div className={`flex items-center border border-gray-300 rounded-full px-5 outline-none focus-within:ring-2 focus-within:ring-gray-300 focus-within:ring-offset-2 ${(errors && errors.length > 0) ? "focus-within:ring-red-500 border-red-500" : ""}`}>
         <div>{icon[name]}</div>
         <input
           className="p-3 outline-none"
