@@ -6,7 +6,6 @@ interface Routes {
 }
 
 const publicUrls: Routes = {
-  "/": true,
   "/create-account": true,
   "/log-in": true
 };
@@ -16,11 +15,11 @@ export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
   const isPublic = publicUrls[pathname];
   if (!session.id && !isPublic) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/log-in", request.url));
   }
 
   if (session.id && isPublic) {
-    return NextResponse.redirect(new URL("/profile", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 }
 
