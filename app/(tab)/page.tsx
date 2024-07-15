@@ -1,8 +1,9 @@
+import AddTweet from "@/components/add-tweet";
 import TweetList from "@/components/tweet-list";
 import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
 
-export const countPerPage = 2;
+export const countPerPage = 4;
 const getInitialTweets = async () => {
   const initialTweets = await db.tweet.findMany({
     select: {
@@ -32,6 +33,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-5 w-full">
+      <AddTweet />
       <TweetList initialTweets={initialTweets} />
     </div>
   );

@@ -8,7 +8,7 @@ export default function TabLayout({ children }: Readonly<Layoutprops>) {
     "use server";
     const session = await getSession();
     session.destroy();
-    console.log("요기");
+    
     redirect("/log-in");
   };
 

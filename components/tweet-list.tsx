@@ -16,13 +16,12 @@ export default function TweetList({ initialTweets }: TweetProps) {
 
   const onClickNextPage = async () => {
     const newTweets = await getTweetsByPage(page + 1);
-    console.log("🚀 ~ onClickNextPage ~ newTweets:", newTweets)
     if (newTweets.length !== 0) {
       setPage(prev => prev + 1);
       setTweets(newTweets);
     }
   };
-console.log(page)
+  
   const onClickPrevPage = async () => {
     if (page === 0) return;
 
