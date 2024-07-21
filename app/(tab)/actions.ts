@@ -1,12 +1,12 @@
 "use server";
 
 import db from "@/lib/db";
-import { countPerPage } from "./page";
 import { z } from "zod";
 import getSession from "@/lib/session";
 import { notFound } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
+const countPerPage = 4;
 export const getTweetsByPage = async (page: number) => {
   const tweets = await db.tweet.findMany({
     select: {

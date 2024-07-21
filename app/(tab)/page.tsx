@@ -3,7 +3,7 @@ import TweetList from "@/components/tweet-list";
 import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
 
-export const countPerPage = 4;
+const countPerPage = 4;
 const getInitialTweets = async () => {
   const initialTweets = await db.tweet.findMany({
     select: {
@@ -13,14 +13,14 @@ const getInitialTweets = async () => {
       User: {
         select: {
           username: true,
-          email: true
-        }
-      }
+          email: true,
+        },
+      },
     },
     take: countPerPage,
     orderBy: {
-      created_at: "desc"
-    }
+      created_at: "desc",
+    },
   });
 
   return initialTweets;
