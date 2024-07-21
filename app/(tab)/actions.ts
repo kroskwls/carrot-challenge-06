@@ -1,6 +1,6 @@
 "use server";
 
-import db from "@/lib/db"
+import db from "@/lib/db";
 import { countPerPage } from "./page";
 import { z } from "zod";
 import getSession from "@/lib/session";
@@ -16,30 +16,29 @@ export const getTweetsByPage = async (page: number) => {
       User: {
         select: {
           username: true,
-          email: true
-        }
-      }
+          email: true,
+        },
+      },
     },
     skip: countPerPage * page,
     take: countPerPage,
     orderBy: {
-      created_at: "desc"
-    }
+      created_at: "desc",
+    },
   });
 
   return tweets;
-}
+};
 
 const tweetSchema = z.string().min(1).max(200);
-
-export const handleAddTweet = async (_:any, formData: FormData) => {
+export const handleAddTweet = async (_: any, formData: FormData) => {
   const tweet = formData.get("tweet");
 
   const result = tweetSchema.safeParse(tweet);
   if (!result.success) {
     return result.error.flatten();
   }
-  
+
   const session = await getSession();
   if (!session.id) {
     return notFound();
@@ -50,9 +49,11 @@ export const handleAddTweet = async (_:any, formData: FormData) => {
       tweet: result.data,
       User: {
         connect: {
-          id: session.id
-        }
-      }
-    }
+          id: session.id,
+        },
+      },
+    },
   });
-}
+
+  revalidatePath("/");
+};
